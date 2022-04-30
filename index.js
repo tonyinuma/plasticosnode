@@ -2,12 +2,12 @@ const express = require('express');
 const mysql = require('mysql');
 const myConnection = require("express-myconnection");
 const morgan = require("morgan");
+const routes = require("./routes/web");
 const app = express();
 
 //routes - rutas 
-app.get('/', (req, res) => {
-  res.render("home");
-});
+app.get('/', routes);
+
 // port -- puerto 
 app.set("port", process.env.PORT || 3000);
 
