@@ -1,31 +1,38 @@
 const express = require('express');
+const mysql = require('mysql');
+const myConnection = require("express-myconnection");
+const morgan = require("morgan");
 const app = express();
-const mysql  = require('mysql');
 
+//routes - rutas 
 app.get('/', (req, res) => {
-    res.render("home");
+  res.render("home");
 });
+// port -- puerto 
+app.set("port", process.env.PORT || 3000);
+
+//middlelware ---
+app.use(morgan('dev'));
+
 //conecion a base de datos //
+app.use(
+  myConnection(
+    mysql,
+    {
+      host: "localhost",
+      user: "root",
+      password: "",
+      port: "3306",
+      database: "plasticos_db",
+    },
+    "single"
+  ));
 
-
-const connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : '',
-  database : 'plasticos_db'
-});
- 
-connection.connect();
- 
-/*connection.query('SELECT * FROM usuarios', function (error, results, fields) {
-  if (error) throw error;
-  console.log('The solution is: ', results[0].username);
-});
- 
-connection.end();
-*/
 //vistas 
 app.set("view engine", "ejs");
-app.set("views","views");
+app.set("views", "views");
 
-app.listen(3000);
+//puerto de conexion 
+app.listen(app.get("port"), () => {
+  console.log(`Server started on port ${app.get("port")}`);
+});

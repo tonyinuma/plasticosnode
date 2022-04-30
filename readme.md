@@ -3,4 +3,4 @@
 Para iniciar este proyecto utilise estos comandos:
 
 - npm install 
-- npm run dev
+- npm run dev //para ejecutar programa
