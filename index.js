@@ -6,7 +6,7 @@ const routes = require("./routes/web");
 const app = express();
 
 //routes - rutas 
-app.get('/', routes);
+app.use(routes);
 
 // port -- puerto 
 app.set("port", process.env.PORT || 3000);
