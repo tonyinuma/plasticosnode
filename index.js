@@ -3,10 +3,8 @@ const mysql = require('mysql');
 const myConnection = require("express-myconnection");
 const morgan = require("morgan");
 const routes = require("./routes/web");
+const expressLayouts = require('express-ejs-layouts');
 const app = express();
-
-//routes - rutas 
-app.use(routes);
 
 // port -- puerto 
 app.set("port", process.env.PORT || 3000);
@@ -31,6 +29,11 @@ app.use(
 //vistas 
 app.set("view engine", "ejs");
 app.set("views", "views");
+app.use(expressLayouts)
+app.set('layout', './layouts/main')
+
+//routes - rutas 
+app.use(routes);
 
 //puerto de conexion 
 app.listen(app.get("port"), () => {
